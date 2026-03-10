@@ -1,0 +1,51 @@
+package org.example.university.services.reservation;
+
+import org.example.university.entities.Reservation;
+import org.example.university.repositories.ReservationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@Component
+public class ReservationServiceImpl implements IReservationService {
+
+    ReservationRepository reservationRepository;
+
+    @Autowired
+    public ReservationServiceImpl(ReservationRepository reservationRepository) {
+        this.reservationRepository = reservationRepository;
+    }
+
+    @Override
+    public Reservation addReservation(Reservation reservation) {
+        return reservationRepository.save(reservation);
+    }
+
+    @Override
+    public Reservation updateReservation(Reservation reservation) {
+        return reservationRepository.save(reservation);
+    }
+
+    @Override
+    public void deleteReservation(String idReservation) {
+        reservationRepository.deleteById(idReservation);
+    }
+
+    @Override
+    public Reservation getReservationById(String idReservation) {
+        return reservationRepository.findById(idReservation).orElse(null);
+    }
+
+    @Override
+    public List<Reservation> getAllReservations() {
+        return (List<Reservation>) reservationRepository.findAll();
+    }
+
+    @Override
+    public Reservation ajouterReservationAvecEtudiants(Reservation reservation) {
+        return reservationRepository.save(reservation);
+    }
+}
